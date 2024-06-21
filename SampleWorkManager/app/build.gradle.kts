@@ -43,6 +43,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    //ViewModel
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    //WorkManager
     implementation(libs.androidx.work.runtime.ktx)
 
     testImplementation(libs.junit)
