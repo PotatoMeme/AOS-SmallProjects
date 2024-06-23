@@ -5,11 +5,19 @@ import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import com.potatomeme.sample_workmanager.MainActivity
+import com.potatomeme.sample_workmanager.NotificationUtil
 
 class BasicWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {
         Log.e(TAG, "Basic Worker Started")
+
+        NotificationUtil.createIntentNotification(
+            applicationContext,
+            "in Basic Worker message",
+            MainActivity::class.java
+        )
 
         inputData.keyValueMap.forEach { (key, value) ->
             Log.e(TAG, "InputData $key:$value")

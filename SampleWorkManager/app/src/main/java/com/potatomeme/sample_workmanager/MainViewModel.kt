@@ -8,12 +8,14 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.ListenableWorker
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkQuery
 import androidx.work.workDataOf
 import com.potatomeme.sample_workmanager.worker.BasicWorker
+import com.potatomeme.sample_workmanager.worker.TimerWorker
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit
 
@@ -33,6 +35,14 @@ class MainViewModel : ViewModel() {
 
     fun enqueueWorker() {
         val request = buildOnTimeWorkRequest(BasicWorker::class.java)
+        workManager.enqueueRequest(request)
+    }
+
+    fun enqueueTimerWorker(){
+        val request = OneTimeWorkRequestBuilder<TimerWorker>()
+            .setInputData(workDataOf("duration" to 60L))
+            .setInitialDelay(0, TimeUnit.SECONDS)
+            .build()
         workManager.enqueueRequest(request)
     }
 
