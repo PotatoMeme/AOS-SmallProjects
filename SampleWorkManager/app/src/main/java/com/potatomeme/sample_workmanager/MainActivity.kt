@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets.Side.all
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,10 +26,12 @@ class MainActivity : AppCompatActivity() {
     private val permissionNotificationRequest =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissionRequest: Map<String, Boolean> ->
             when {
-                permissionRequest.getOrDefault(
-                    Manifest.permission.POST_NOTIFICATIONS,
-                    false
-                ) -> { // notification 권한 O
+                permissionArray.all {
+                    permissionRequest.getOrDefault(
+                        it,
+                        false
+                    )
+                }  -> { // 모든 권한 O
                     Toast.makeText(this, "Notification Permission Granted", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -40,21 +43,25 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    private val permissionArray = arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+    private val permissionArray = arrayOf(
+        //Manifest.permission.FOREGROUND_SERVICE,
+        //Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC,
+        Manifest.permission.POST_NOTIFICATIONS
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && permissionArray.all { ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
+                it
+            ) != PackageManager.PERMISSION_GRANTED }
         ) {
             permissionNotificationRequest.launch(permissionArray)
         } else {
-            //NotificationUtil.createNotification(this, "SWM message", MainActivity::class.java)
+            Toast.makeText(this,"All Permission Granted",Toast.LENGTH_SHORT).show()
         }
 
 

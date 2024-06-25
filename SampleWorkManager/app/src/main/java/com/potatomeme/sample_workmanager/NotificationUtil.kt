@@ -24,7 +24,7 @@ object NotificationUtil {
             NotificationManager.IMPORTANCE_DEFAULT
         ).apply {
             description = "SWM 알림 채널 입니다."
-            enableLights(true)
+            //enableLights(true)
             lightColor = Color.RED
             setShowBadge(true)
             vibrationPattern = longArrayOf(100, 200, 100, 200)

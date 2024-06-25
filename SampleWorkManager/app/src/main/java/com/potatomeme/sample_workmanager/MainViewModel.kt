@@ -15,6 +15,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkQuery
 import androidx.work.workDataOf
 import com.potatomeme.sample_workmanager.worker.BasicWorker
+import com.potatomeme.sample_workmanager.worker.DownloadWorker
 import com.potatomeme.sample_workmanager.worker.TimerWorker
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit
@@ -39,9 +40,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun enqueueTimerWorker(){
-        val request = OneTimeWorkRequestBuilder<TimerWorker>()
-            .setInputData(workDataOf("duration" to 60L))
-            .setInitialDelay(0, TimeUnit.SECONDS)
+        val request = OneTimeWorkRequestBuilder<DownloadWorker>()
             .build()
         workManager.enqueueRequest(request)
     }
