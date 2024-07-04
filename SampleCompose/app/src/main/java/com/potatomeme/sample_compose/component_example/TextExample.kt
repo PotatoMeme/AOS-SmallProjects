@@ -135,7 +135,7 @@ fun TextExample(name: String) {
 
             shadow = null,
             drawStyle = null,
-            textDirection = null,
+            //textDirection = null,
 
             //The indentation of the paragraph.
             //단락의 들여쓰기입니다.
@@ -145,8 +145,8 @@ fun TextExample(name: String) {
             //플랫폼별 TextStyle 매개변수.
             platformStyle = null,
             lineHeightStyle = null,
-            lineBreak = null,
-            hyphens = null,
+            //lineBreak = null,
+            //hyphens = null,
             textMotion = null,
         )
     )
