@@ -3,6 +3,7 @@ package com.potatomeme.sample_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.potatomeme.sample_compose.component_example.CheckBoxExample
 import com.potatomeme.sample_compose.component_example.ImageToNetWorkWithCoil
+import com.potatomeme.sample_compose.component_example.TextFieldExample
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,18 +22,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             SampleComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
+                /*Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //Greeting("Android")
-                    /*ButtonExample {
+                    *//*ButtonExample {
                         Log.d(TAG, "button is Clicked")
-                    }*/
-                    /*val imageStr = "https://avatars.githubusercontent.com/u/89847975?v=4"
-                    ImageToNetWorkWithCoil(imageStr = imageStr)*/
-                    CheckBoxExample()
+                    }*//*
+                    *//*val imageStr = "https://avatars.githubusercontent.com/u/89847975?v=4"
+                    ImageToNetWorkWithCoil(imageStr = imageStr)*//*
+                    *//*CheckBoxExample()*//*
+
+                }*/
+                Column {
+                    TextFieldExample()
+                    TextFieldExample()
                 }
+
             }
         }
     }
