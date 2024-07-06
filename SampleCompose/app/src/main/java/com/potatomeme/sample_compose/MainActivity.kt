@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.potatomeme.sample_compose.component_example.CheckBoxExample
 import com.potatomeme.sample_compose.component_example.ImageToNetWorkWithCoil
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 
@@ -27,8 +28,9 @@ class MainActivity : ComponentActivity() {
                     /*ButtonExample {
                         Log.d(TAG, "button is Clicked")
                     }*/
-                    val imageStr = "https://avatars.githubusercontent.com/u/89847975?v=4"
-                    ImageToNetWorkWithCoil(imageStr = imageStr)
+                    /*val imageStr = "https://avatars.githubusercontent.com/u/89847975?v=4"
+                    ImageToNetWorkWithCoil(imageStr = imageStr)*/
+                    CheckBoxExample()
                 }
             }
         }
