@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "com.potatomeme.sample_clipboard";
+option java_multiple_files = true;
+
+message Clipboards{
+  repeated Clipboard clipboard = 1;
+}
+
+message Clipboard {
+  int32 type = 1;
+  string value = 2;
+  string time = 3;
+}
