@@ -4,17 +4,23 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.potatomeme.sample_clipboard.data.model.ClipboardState
 import com.potatomeme.sample_clipboard.data.model.StopWatchState
 import com.potatomeme.sample_clipboard.data.repository.ClipboardRepository
 import com.potatomeme.sample_clipboard.data.repository.ClipboardRepositoryImpl
 import com.potatomeme.sample_clipboard.data.source.ClipboardDataStoreSource
+import com.potatomeme.sample_clipboard.worker.ClipboardWorker
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class MainViewModel(application: Application) : ViewModel() {
+    private val workManager: WorkManager = WorkManager.getInstance(application)
     private val repository: ClipboardRepository
 
     val clipboardsFlow: StateFlow<List<ClipboardState>>
@@ -42,6 +48,22 @@ class MainViewModel(application: Application) : ViewModel() {
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = StopWatchState.Stop
         )
+    }
+
+    fun enqueueClipboardWorker() {
+        val request = OneTimeWorkRequestBuilder<ClipboardWorker>()
+            .build()
+
+        workManager.enqueueUniqueWork(
+            "Clipboard",
+            ExistingWorkPolicy.KEEP,
+            request
+        )
+    }
+
+    fun cancelWorker() = viewModelScope.launch {
+        workManager.cancelUniqueWork("Clipboard")
+        repository.refreshStopWatch()
     }
 
 }
