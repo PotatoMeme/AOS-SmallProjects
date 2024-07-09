@@ -1,6 +1,9 @@
 package com.potatomeme.sample_clipboard.ui
 
 import android.app.Application
+import android.content.ClipboardManager
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -51,6 +54,7 @@ class MainViewModel(application: Application) : ViewModel() {
     }
 
     fun enqueueClipboardWorker() {
+        clipBoardDiff()
         val request = OneTimeWorkRequestBuilder<ClipboardWorker>()
             .build()
 
@@ -66,6 +70,15 @@ class MainViewModel(application: Application) : ViewModel() {
         repository.refreshStopWatch()
     }
 
+    private val clipboardManager: ClipboardManager =
+        application.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    fun clipBoardDiff() {
+        Log.d(TAG, "clipBoardDiff: ${(clipboardManager.primaryClip?.itemCount)}")
+    }
+
+    companion object{
+        private const val TAG = "MainViewModel"
+    }
 }
 
 class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {

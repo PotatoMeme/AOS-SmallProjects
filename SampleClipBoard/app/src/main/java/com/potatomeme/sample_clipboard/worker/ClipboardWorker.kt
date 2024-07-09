@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
@@ -17,6 +18,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.potatomeme.sample_clipboard.R
+import com.potatomeme.sample_clipboard.data.model.ClipboardState
 import com.potatomeme.sample_clipboard.data.model.StopWatchState
 import com.potatomeme.sample_clipboard.data.repository.ClipboardRepository
 import com.potatomeme.sample_clipboard.data.repository.ClipboardRepositoryImpl
@@ -31,6 +33,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -39,20 +42,30 @@ class ClipboardWorker(
     params: WorkerParameters,
 ) : CoroutineWorker(appContext, params) {
 
-    private val dataStoreSource: ClipboardDataStoreSource = ClipboardDataStoreSource.getInstance(appContext)
-    private val repository : ClipboardRepository = ClipboardRepositoryImpl.getInstance(dataStoreSource)
+    private val dataStoreSource: ClipboardDataStoreSource =
+        ClipboardDataStoreSource.getInstance(appContext)
+    private val repository: ClipboardRepository =
+        ClipboardRepositoryImpl.getInstance(dataStoreSource)
 
     private val notificationManager: NotificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    private val clipboardManager : ClipboardManager = appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    private val clipboardManager: ClipboardManager =
+        appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+    private val clipboardFlow: StateFlow<List<ClipboardState>> =
+        repository.getClipboardsFlow().stateIn(
+            CoroutineScope(Dispatchers.IO),
+            started = SharingStarted.WhileSubscribed(1000),
+            initialValue = listOf()
+        )
 
     private val countFlow: Flow<Long> = repository.getStopWatchCountFlow()
     private val stateFlow: Flow<StopWatchState> = repository.getStopWatchStateFlow()
 
     private val combinedFlow: StateFlow<Pair<Long, StopWatchState>> =
         countFlow.combine(stateFlow) { time, stopWatchState ->
-            Pair(time/1000, stopWatchState)
+            Pair(time / 1000, stopWatchState)
         }.stateIn(
             CoroutineScope(Dispatchers.IO),
             started = SharingStarted.WhileSubscribed(1000),
@@ -62,11 +75,25 @@ class ClipboardWorker(
     override suspend fun doWork(): Result = coroutineScope {
         setForeground(createForegroundInfo())
 
+
         val job = launch {
             repository.stopWatchStateChanged(StopWatchState.Play)
             var isRunning = false
             var pastTime = System.currentTimeMillis()
 
+            //앱이 포커스 되어있지 않으면 되지 않음
+            clipboardManager.addPrimaryClipChangedListener {
+                val value = clipboardManager.primaryClip?.getItemAt(0)
+                    ?.text
+                    ?.toString()
+                launch {
+                    dataStoreSource.addClipBoard(
+                        ClipboardState.TextClipBoard(
+                            value = value ?: "null", "${combinedFlow.first().first} 초"
+                        )
+                    )
+                }
+            }
             launch {
                 while (true) {
                     //Log.d(TAG, "${pastTime / 1000} ")
@@ -92,7 +119,16 @@ class ClipboardWorker(
                         }
                     }
 
-                    updateNotification(isRunning , "$count 초")
+                    updateNotification(isRunning, "$count 초")
+                }
+            }
+            launch {
+                clipboardFlow.collectLatest { list ->
+                    Log.d(TAG, "doWork: ClipBoardList Size : ${list.size}")
+                    if (list.isNotEmpty()) {
+                        Log.d(TAG, "doWork: ClipBoardList Current : ${list.last()}")
+                    }
+
                 }
             }
         }
@@ -187,7 +223,7 @@ class ClipboardWorker(
 
     companion object {
         private const val TAG = "ClipboardWorker"
-        
+
         const val CHANNEL_ID = "CLIPBOARD_WORKER_CHANNEL_ID"
         const val CHANNEL_NAME = "CLIPBOARD_WORKER_CHANNEL_NAME"
         const val NOTIFICATION_ID = 13
