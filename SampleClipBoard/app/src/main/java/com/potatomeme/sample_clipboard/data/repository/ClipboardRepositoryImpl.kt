@@ -7,15 +7,15 @@ import com.potatomeme.sample_clipboard.data.source.ClipboardDataStoreSource
 import kotlinx.coroutines.flow.Flow
 
 class ClipboardRepositoryImpl private constructor(private val dataStoreSource:ClipboardDataStoreSource) : ClipboardRepository {
-    override suspend fun getClipboardsFlow(): Flow<List<ClipboardState>> {
+    override fun getClipboardsFlow(): Flow<List<ClipboardState>> {
         return dataStoreSource.clipboardsFlow
     }
 
-    override suspend fun getStopWatchCountFlow(): Flow<Long> {
+    override fun getStopWatchCountFlow(): Flow<Long> {
         return dataStoreSource.stopWatchCountFlow
     }
 
-    override suspend fun getStopWatchStateFlow(): Flow<StopWatchState> {
+    override fun getStopWatchStateFlow(): Flow<StopWatchState> {
         return dataStoreSource.stopWatchStateFlow
     }
 

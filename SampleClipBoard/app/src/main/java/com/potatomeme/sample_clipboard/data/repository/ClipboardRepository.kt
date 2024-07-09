@@ -6,9 +6,9 @@ import com.potatomeme.sample_clipboard.data.model.StopWatchState
 import kotlinx.coroutines.flow.Flow
 
 interface ClipboardRepository {
-    suspend fun getClipboardsFlow(): Flow<List<ClipboardState>>
-    suspend fun getStopWatchCountFlow(): Flow<Long>
-    suspend fun getStopWatchStateFlow(): Flow<StopWatchState>
+    fun getClipboardsFlow(): Flow<List<ClipboardState>>
+    fun getStopWatchCountFlow(): Flow<Long>
+    fun getStopWatchStateFlow(): Flow<StopWatchState>
     suspend fun addClipBoard(clipboardState: ClipboardState)
     suspend fun refreshClipBoard()
     suspend fun refreshStopWatch()
