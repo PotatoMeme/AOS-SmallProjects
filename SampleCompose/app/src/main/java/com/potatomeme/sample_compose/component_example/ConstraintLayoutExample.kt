@@ -7,14 +7,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewConstraintLayout() {
-    SampleConstraintLayoutType1()
+   SampleComposeTheme {
+       ConstraintLayoutExam2()
+   }
 }
 
 @Composable
@@ -26,6 +31,35 @@ fun SimpleConstraintLayout() {
 
 @Composable
 fun SampleConstraintLayoutType1() {
+    ConstraintLayout(
+        //modifier: androidx.compose.ui.Modifier = COMPILED_CODE,
+        modifier = Modifier.fillMaxSize(),
+        //optimizationLevel: kotlin.Int = COMPILED_CODE
+        //optimizationLevel = 0,
+    ) {
+    }
+}
+
+@Composable
+fun SampleConstraintLayoutType2() {
+    ConstraintLayout(
+        // constraintSet: androidx.constraintlayout.compose.ConstraintSet,
+        // constraintSet = ConstraintSet(""),
+        // modifier: androidx.compose.ui.Modifier = COMPILED_CODE,
+        modifier = Modifier,
+        // optimizationLevel: kotlin.Int = COMPILED_CODE,
+        // optimizationLevel = 0,
+        // animateChanges: kotlin.Boolean = COMPILED_CODE,
+        // animateChanges = false,
+        // animationSpec: androidx.compose.animation.core.AnimationSpec<kotlin.Float> = COMPILED_CODE,
+        // noinline finishedAnimationListener: (() -> kotlin.Unit)? = COMPILED_CODE
+    ) {
+
+    }
+}
+
+@Composable
+fun ConstraintLayoutExam1() {
     ConstraintLayout(
         //modifier: androidx.compose.ui.Modifier = COMPILED_CODE,
         modifier = Modifier.fillMaxSize(),
@@ -76,19 +110,62 @@ fun SampleConstraintLayoutType1() {
 }
 
 @Composable
-fun SampleConstraintLayoutType2() {
-    ConstraintLayout(
-        // constraintSet: androidx.constraintlayout.compose.ConstraintSet,
-        // constraintSet = ConstraintSet(""),
-        // modifier: androidx.compose.ui.Modifier = COMPILED_CODE,
-        modifier = Modifier,
-        // optimizationLevel: kotlin.Int = COMPILED_CODE,
-        // optimizationLevel = 0,
-        // animateChanges: kotlin.Boolean = COMPILED_CODE,
-        // animateChanges = false,
-        // animationSpec: androidx.compose.animation.core.AnimationSpec<kotlin.Float> = COMPILED_CODE,
-        // noinline finishedAnimationListener: (() -> kotlin.Unit)? = COMPILED_CODE
-    ) {
+fun ConstraintLayoutExam2() {
+    val constraintSet = ConstraintSet{
+        //레퍼런스 생성
+        val redBox = createRefFor("redBox")
+        val magentaBox = createRefFor("magentaBox")
+        val greenBox = createRefFor("greenBox")
+        val yellowBox = createRefFor("yellowBox")
 
+        //레퍼런스 constrain 지정
+        constrain(redBox) {
+            bottom.linkTo(parent.bottom, 10.dp)
+            end.linkTo(parent.end, 30.dp)
+        }
+
+        constrain(magentaBox) {
+            start.linkTo(parent.start, 10.dp)
+            end.linkTo(parent.end, 30.dp)
+        }
+
+        constrain(greenBox) {
+            centerTo(parent)
+        }
+
+        constrain(yellowBox) {
+            start.linkTo(greenBox.end)
+            top.linkTo(greenBox.bottom)
+        }
+    }
+
+    ConstraintLayout(
+        constraintSet = constraintSet,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Red)
+                .layoutId("redBox")
+        )
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Magenta)
+                .layoutId("magentaBox")
+        )
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Green)
+                .layoutId("greenBox")
+        )
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Yellow)
+                .layoutId("yellowBox")
+        )
     }
 }
