@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.potatomeme.sample_compose.component_example.CheckBoxExample
+import com.potatomeme.sample_compose.component_example.ConstraintLayoutExam4
 import com.potatomeme.sample_compose.component_example.ImageToNetWorkWithCoil
 import com.potatomeme.sample_compose.component_example.TestSpace1
 import com.potatomeme.sample_compose.component_example.TextFieldExample
@@ -66,7 +67,8 @@ class MainActivity : ComponentActivity() {
                             TextFieldExample()
                             TextFieldExample()
                         }*/
-                        TestSpace1(testA2 = it)
+                        //TestSpace1(testA2 = it)
+                        ConstraintLayoutExam4()
                     }
                 }
             }
