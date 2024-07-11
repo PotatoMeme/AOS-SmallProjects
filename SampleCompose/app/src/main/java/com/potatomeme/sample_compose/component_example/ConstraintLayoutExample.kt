@@ -4,12 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
@@ -18,7 +21,7 @@ import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 @Composable
 fun PreviewConstraintLayout() {
    SampleComposeTheme {
-       ConstraintLayoutExam2()
+       ConstraintLayoutExam3()
    }
 }
 
@@ -166,6 +169,58 @@ fun ConstraintLayoutExam2() {
                 .size(40.dp)
                 .background(Color.Yellow)
                 .layoutId("yellowBox")
+        )
+    }
+}
+
+@Composable
+fun ConstraintLayoutExam3() {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        val (redBox, yellowBox, magentaBox, text) = createRefs()
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Red)
+                .constrainAs(redBox) {
+                    start.linkTo(parent.start)
+                }
+        )
+
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Yellow)
+                .constrainAs(yellowBox) {
+                    start.linkTo(parent.start, margin = 40.dp)
+                }
+        )
+
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Magenta)
+                .constrainAs(magentaBox) {
+                    start.linkTo(parent.start, margin = 80.dp)
+                }
+        )
+
+        /*createHorizontalChain(
+            redBox, yellowBox, magentaBox,
+            chainStyle = ChainStyle.SpreadInside
+        )*/
+        createVerticalChain(
+            redBox, yellowBox, magentaBox,
+            chainStyle = ChainStyle.SpreadInside
+        )
+
+        val boxBarrier = createEndBarrier(redBox, yellowBox, magentaBox)
+        Text(
+            text = "나랏말싸미 듕귁에 달아 문자와로 서로 사맛디 아니할쌔 어린 백성이 니르고저 핣배이셔도",
+            modifier = Modifier.constrainAs(text) {
+                start.linkTo(boxBarrier)
+            }.width(100.dp)
         )
     }
 }
