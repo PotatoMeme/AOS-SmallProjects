@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.potatomeme.sample_compose.component_example.DialogExamType2
+import com.potatomeme.sample_compose.component_example.DropDownMenuExam
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -61,7 +64,13 @@ class MainActivity : ComponentActivity() {
                         }*/
                         //TestSpace1(testA2 = it)
                         //ConstraintLayoutExam4()
-                        DialogExamType2()
+                        //DialogExamType2()
+                        Box {
+                            Column {
+                                DropDownMenuExam()
+                                Text(text = "test")
+                            }
+                        }
                     }
                 }
             }
