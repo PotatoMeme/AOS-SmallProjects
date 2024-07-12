@@ -4,20 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.potatomeme.sample_compose.component_example.CheckBoxExample
-import com.potatomeme.sample_compose.component_example.ConstraintLayoutExam4
-import com.potatomeme.sample_compose.component_example.ImageToNetWorkWithCoil
-import com.potatomeme.sample_compose.component_example.TestSpace1
-import com.potatomeme.sample_compose.component_example.TextFieldExample
+import com.potatomeme.sample_compose.component_example.DialogExamType2
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -68,7 +60,8 @@ class MainActivity : ComponentActivity() {
                             TextFieldExample()
                         }*/
                         //TestSpace1(testA2 = it)
-                        ConstraintLayoutExam4()
+                        //ConstraintLayoutExam4()
+                        DialogExamType2()
                     }
                 }
             }
