@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.potatomeme.sample_compose.component_example.CrossFadeExample1
+import com.potatomeme.sample_compose.component_example.SampleFocusRequest
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -70,7 +70,8 @@ class MainActivity : ComponentActivity() {
                         //SnackBarExam1()
                         //SnackBarExam2()
                         //AnimatedVisibilityExample1()
-                        CrossFadeExample1()
+                        //CrossFadeExample1()
+                        SampleFocusRequest()
                     }
                 }
             }
