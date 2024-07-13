@@ -4,18 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.potatomeme.sample_compose.component_example.Demo_SearchableExposedDropdownMenuBox
-import com.potatomeme.sample_compose.component_example.DropDownMenuExam
-import com.potatomeme.sample_compose.component_example.SnackBarExam1
-import com.potatomeme.sample_compose.component_example.SnackBarExam2
+import com.potatomeme.sample_compose.component_example.AnimatedVisibilityExample
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -74,7 +68,8 @@ class MainActivity : ComponentActivity() {
                             }
                         }*/
                         //SnackBarExam1()
-                        SnackBarExam2()
+                        //SnackBarExam2()
+                        AnimatedVisibilityExample()
                     }
                 }
             }
