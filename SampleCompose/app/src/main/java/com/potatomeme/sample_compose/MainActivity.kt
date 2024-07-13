@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.potatomeme.sample_compose.component_example.Demo_SearchableExposedDropdownMenuBox
 import com.potatomeme.sample_compose.component_example.DropDownMenuExam
 import com.potatomeme.sample_compose.component_example.SnackBarExam1
+import com.potatomeme.sample_compose.component_example.SnackBarExam2
 import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -72,7 +73,8 @@ class MainActivity : ComponentActivity() {
                                 Demo_SearchableExposedDropdownMenuBox()
                             }
                         }*/
-                        SnackBarExam1()
+                        //SnackBarExam1()
+                        SnackBarExam2()
                     }
                 }
             }
