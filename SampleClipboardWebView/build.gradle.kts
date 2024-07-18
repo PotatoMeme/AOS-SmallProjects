@@ -4,3 +4,11 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.protobuf) apply false
 }
+
+/*
+buildscript {
+    dependencies {
+        //navigation
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
+    }
+}*/

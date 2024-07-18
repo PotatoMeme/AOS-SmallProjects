@@ -67,13 +67,19 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
 
+    //viewmodel
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.fragment:fragment-ktx:1.8.0")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
 
+    //datastore
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("androidx.datastore:datastore:1.1.1")
     implementation("com.google.protobuf:protobuf-javalite:3.25.1")
+
+    //navigation
+    //implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
+    //implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

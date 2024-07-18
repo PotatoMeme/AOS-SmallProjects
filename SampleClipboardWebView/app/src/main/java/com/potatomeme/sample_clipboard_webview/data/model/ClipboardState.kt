@@ -49,3 +49,10 @@ fun Clipboard.toClipboardState(): ClipboardState {
         else -> throw IllegalArgumentException("Clipboard wrong type, current value $type")
     }
 }
+
+fun ClipboardState.getType(): Int {
+    return when (this) {
+        is ClipboardState.TextClipBoard -> ClipboardState.STATE_TEXT
+        is ClipboardState.ImageClipBoard -> ClipboardState.STATE_IMAGE
+    }
+}
