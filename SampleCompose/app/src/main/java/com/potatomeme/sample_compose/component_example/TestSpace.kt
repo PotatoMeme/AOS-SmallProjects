@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -14,7 +17,7 @@ import com.potatomeme.sample_compose.ui.theme.SampleComposeTheme
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewTest(){
+fun PreviewTest() {
     SampleComposeTheme {
         TestSpace1(false)
     }
@@ -31,7 +34,7 @@ fun PreviewTest(){
  * remember 와 MutableState
  * */
 @Composable
-fun TestSpace1(testA2:Boolean){
+fun TestSpace1(testA2: Boolean) {
     var testA1 = false
 
     // remember
@@ -55,7 +58,7 @@ fun TestSpace1(testA2:Boolean){
         mutableStateOf(false)
     }
 
-    val testA4 = remember{
+    val testA4 = remember {
         mutableStateOf(testA2)
     }
 
@@ -93,4 +96,16 @@ fun TestSpace1(testA2:Boolean){
             Text(text = "testA5 state $testA5")
         }
     }
+}
+
+@Composable
+fun TestSpace2() {
+val names = remember {
+    mutableStateListOf<String>()
+}
+
+Log.d("********", "TestSpace2: ${names.size}")
+LaunchedEffect(true) {
+    names.add("test")
+}
 }

@@ -25,14 +25,13 @@ class WebViewFragment private constructor() : Fragment() {
     private val viewModel: MainViewModel by activityViewModels {
         MainViewModelFactory(application = ClipboardApplication.getApplication())
     }
-    private val clipboardManager: ClipboardManager =
-        ClipboardApplication.getApplication()
-            .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
     private val mFormat: SimpleDateFormat = SimpleDateFormat("yyyy:MM:DD hh:mm")
 
+    private val clipboardManager: ClipboardManager =
+        ClipboardApplication.getApplication()
+            .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     private var lastClipData: CharSequence? = clipboardManager.primaryClip?.getItemAt(0)?.text
-
     private val clipListener =
         ClipboardManager.OnPrimaryClipChangedListener {
             Log.d(TAG, "onPrimaryClipChanged")

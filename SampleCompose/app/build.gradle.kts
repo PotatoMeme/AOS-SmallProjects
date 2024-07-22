@@ -65,6 +65,11 @@ dependencies {
 
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
+    //viewmodel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    //livedata
+    implementation("androidx.compose.runtime:runtime-livedata")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

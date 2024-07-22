@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-
             flow.collect{
                 setContent {
                     SampleComposeTheme {
