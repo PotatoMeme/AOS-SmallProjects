@@ -21,6 +21,22 @@
           <timeTargetWasSelectedWithDropDown value="2024-06-30T12:57:18.124501Z" />
         </State>
       </entry>
+      <entry key="navigation">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\main\.android\avd\Nexus_5_API_31.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-07-23T14:39:08.231156500Z" />
+        </State>
+      </entry>
     </value>
   </component>
 </project>
