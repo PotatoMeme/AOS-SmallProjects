@@ -23,3 +23,4 @@ rootProject.name = "Sample-Compose"
 include(":app")
 include(":navigation")
 include(":self_injector")
+include(":hilt")
