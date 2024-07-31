@@ -1,4 +1,4 @@
-package com.potatomeme.hilt
+package com.potatomeme.hilt_sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,9 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.potatomeme.hilt.ui.theme.SampleComposeTheme
+import com.potatomeme.hilt_sample.ui.theme.SampleComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var myName: MyName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting(myName.toString())
                 }
             }
         }
