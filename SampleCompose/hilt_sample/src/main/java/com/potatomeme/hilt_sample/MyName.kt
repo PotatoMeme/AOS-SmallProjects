@@ -1,5 +1,6 @@
 package com.potatomeme.hilt_sample
 
+import java.util.UUID
 import javax.inject.Inject
 
 
@@ -7,7 +8,8 @@ import javax.inject.Inject
 class MyName
 //@Inject constructor()
 {
+    private val uuid = UUID.randomUUID()
     override fun toString(): String {
-        return "test name"
+        return "test name $uuid"
     }
 }

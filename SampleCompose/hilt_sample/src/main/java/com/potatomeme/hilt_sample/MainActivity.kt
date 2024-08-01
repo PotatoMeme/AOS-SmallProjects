@@ -1,6 +1,8 @@
 package com.potatomeme.hilt_sample
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,8 +21,13 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var myName: MyName
+
+    @Inject
+    lateinit var app: Application
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("TAG", "onCreate: app = $app", )
         setContent {
             SampleComposeTheme {
                 // A surface container using the 'background' color from the theme

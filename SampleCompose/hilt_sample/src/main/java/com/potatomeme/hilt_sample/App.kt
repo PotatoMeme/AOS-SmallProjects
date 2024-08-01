@@ -15,6 +15,7 @@ class App :Application() {
         //Log.e(TAG, "test MyNameInstance1  $myName" )
         super.onCreate()//여기서 의존성 주입이 발생
         Log.e(TAG, "test MyNameInstance2  $myName" )
+        Log.e(TAG, "onCreate: $this")
     }
     companion object{
         private const val TAG = "App"
