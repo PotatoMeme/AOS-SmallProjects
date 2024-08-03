@@ -15,10 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.potatomeme.hilt_sample.ui.theme.SampleComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    //@CustomQualifier
+    //@Named("test")
     @Inject
     lateinit var myName: MyName
 
@@ -31,13 +34,13 @@ class MainActivity : ComponentActivity() {
     private lateinit var testClassB2: TestClassB
 
     @Inject
-    fun injectTestClassB2(testClassB: TestClassB){
+    fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("TAG", "onCreate: app = $app", )
+        Log.e("TAG", "onCreate: app = $app")
         assert(this::testClassB1.isInitialized)
         testClassB1.printUUID()
         assert(this::testClassB2.isInitialized)
