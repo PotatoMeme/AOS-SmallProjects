@@ -29,17 +29,6 @@
       </entry>
       <entry key="hilt_sample">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\main\.android\avd\Nexus_5_API_31.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
           <targetSelectedWithDropDown>
             <Target>
               <type value="QUICK_BOOT_TARGET" />
@@ -51,7 +40,7 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-08-01T07:43:25.372788800Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-08-03T04:20:48.190263500Z" />
         </State>
       </entry>
       <entry key="hilt_sample.hilt_module">

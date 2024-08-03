@@ -25,9 +25,23 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var app: Application
 
+    @Inject
+    lateinit var testClassB1: TestClassB
+
+    private lateinit var testClassB2: TestClassB
+
+    @Inject
+    fun injectTestClassB2(testClassB: TestClassB){
+        testClassB2 = testClassB
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("TAG", "onCreate: app = $app", )
+        assert(this::testClassB1.isInitialized)
+        testClassB1.printUUID()
+        assert(this::testClassB2.isInitialized)
+        testClassB2.printUUID()
         setContent {
             SampleComposeTheme {
                 // A surface container using the 'background' color from the theme
