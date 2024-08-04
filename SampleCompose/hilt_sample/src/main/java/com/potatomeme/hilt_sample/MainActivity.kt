@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.potatomeme.hilt_sample.ui.theme.SampleComposeTheme
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Optional
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
@@ -51,6 +52,9 @@ class MainActivity : ComponentActivity() {
     lateinit var sampleRepository: SampleRepository
 
     @Inject
+    lateinit var sampleAAA: Optional<AAA>
+
+    @Inject
     fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
     }
@@ -81,6 +85,8 @@ class MainActivity : ComponentActivity() {
         assert(this::sampleRepository.isInitialized)
         Log.e("TAG", "onCreate: sampleRepository : ${sampleRepository}")
         Log.e("TAG", "onCreate: sampleRepository.getUUID() : ${sampleRepository.getUUID()}")
+
+        Log.e("TAG", "onCreate: sampleAAA is present : ${sampleAAA.isPresent}", )
 
         setContent {
             SampleComposeTheme {
