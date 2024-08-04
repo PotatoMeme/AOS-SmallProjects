@@ -46,6 +46,10 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var providerTestClass2 : Provider<TestClassA>
 
+    @CustomQualifier
+    @Inject
+    lateinit var sampleRepository: SampleRepository
+
     @Inject
     fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
@@ -74,6 +78,9 @@ class MainActivity : ComponentActivity() {
         Log.e("TAG", "onCreate: providerTestClass2 time1, ${providerTestClass2.get().getUUID()}")
         Log.e("TAG", "onCreate: providerTestClass2 time2, ${providerTestClass2.get().getUUID()}")
 
+        assert(this::sampleRepository.isInitialized)
+        Log.e("TAG", "onCreate: sampleRepository : ${sampleRepository}")
+        Log.e("TAG", "onCreate: sampleRepository.getUUID() : ${sampleRepository.getUUID()}")
 
         setContent {
             SampleComposeTheme {
