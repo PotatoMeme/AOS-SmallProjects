@@ -55,6 +55,9 @@ class MainActivity : ComponentActivity() {
     lateinit var sampleAAA: Optional<AAA>
 
     @Inject
+    lateinit var sampleSet : Set<String>
+
+    @Inject
     fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
     }
@@ -87,6 +90,12 @@ class MainActivity : ComponentActivity() {
         Log.e("TAG", "onCreate: sampleRepository.getUUID() : ${sampleRepository.getUUID()}")
 
         Log.e("TAG", "onCreate: sampleAAA is present : ${sampleAAA.isPresent}", )
+
+        assert(this::sampleSet.isInitialized)
+        Log.e("TAG", "onCreate: sampleSet size , ${sampleSet.size}", )
+        sampleSet.forEachIndexed { index, s ->
+            Log.e("TAG", "onCreate: sampleSet $index is $s", )
+        }
 
         setContent {
             SampleComposeTheme {

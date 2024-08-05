@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.ElementsIntoSet
+import dagger.multibindings.IntoSet
 import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -49,6 +51,22 @@ object AppModule {
     fun provideMyName5(): MyName {
         Log.e("******************", "provideMyName5 호출")
         return MyName()
+    }
+
+    @Provides
+    @IntoSet
+    fun provideStringA() : String{
+        return "TestA"
+    }
+    @Provides
+    @IntoSet
+    fun provideStringB() : String{
+        return "TestB"
+    }
+    @Provides
+    @ElementsIntoSet
+    fun provideStringC() : Set<String>{
+        return listOf("TestC","TestD").toSet()
     }
 }
 
