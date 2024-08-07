@@ -58,6 +58,14 @@ class MainActivity : ComponentActivity() {
     lateinit var sampleSet : Set<String>
 
     @Inject
+    lateinit var sampleMap1 : Map<String,String>
+
+    @Inject
+    lateinit var sampleMap2 : Map<String,Int>
+
+    @Inject
+    lateinit var sampleMap3 : Map<EnumClass,String>
+    @Inject
     fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
     }
@@ -96,6 +104,13 @@ class MainActivity : ComponentActivity() {
         sampleSet.forEachIndexed { index, s ->
             Log.e("TAG", "onCreate: sampleSet $index is $s", )
         }
+
+        Log.e("TAG", "onCreate: sampleMap1 key : SampleA , value : ${sampleMap1["SampleA"]}", )
+        Log.e("TAG", "onCreate: sampleMap1 key : SampleB , value : ${sampleMap1["SampleB"]}", )
+
+        Log.e("TAG", "onCreate: sampleMap2 key : SampleC , value : ${sampleMap2["SampleC"]}", )
+
+        Log.e("TAG", "onCreate: sampleMap3 key : EnumClass.TEST_A , value : ${sampleMap3[EnumClass.TEST_A]}", )
 
         setContent {
             SampleComposeTheme {

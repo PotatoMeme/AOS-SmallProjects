@@ -1,12 +1,15 @@
 package com.potatomeme.hilt_sample
 
 import android.util.Log
+import dagger.MapKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.ElementsIntoSet
+import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
+import dagger.multibindings.StringKey
 import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -68,7 +71,44 @@ object AppModule {
     fun provideStringC() : Set<String>{
         return listOf("TestC","TestD").toSet()
     }
+
+    @Provides
+    @IntoMap
+    @StringKey("SampleA")
+    fun provideStringStringMap1() : String{
+        return "testA"
+    }
+    @Provides
+    @IntoMap
+    @StringKey("SampleB")
+    fun provideStringStringMap2() : String{
+        return "testB"
+    }
+
+    @Provides
+    @IntoMap
+    @StringKey("SampleC")
+    fun provideStringIntMap1() : Int{
+        return 1
+    }
+
+    @Provides
+    @IntoMap
+    @MyEnumClass(EnumClass.TEST_A)
+    fun provideEnumStringMap1() : String{
+        return "Enum"
+    }
+
 }
+
+enum class EnumClass{
+    TEST_A,
+    TEST_B,
+    TEST_C,
+}
+
+@MapKey
+annotation class MyEnumClass(val value:EnumClass)
 
 @Qualifier
 annotation class CustomQualifier
