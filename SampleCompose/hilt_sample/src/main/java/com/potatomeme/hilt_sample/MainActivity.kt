@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,15 +38,16 @@ class MainActivity : ComponentActivity() {
     private lateinit var testClassB2: TestClassB
 
     @Inject
-    lateinit var lazyTestClass : Lazy<TestClassA>
-    @Inject
-    lateinit var lazyTestClassToCompare : Lazy<TestClassA>
+    lateinit var lazyTestClass: Lazy<TestClassA>
 
     @Inject
-    lateinit var providerTestClass1 : Provider<TestClassB>
+    lateinit var lazyTestClassToCompare: Lazy<TestClassA>
 
     @Inject
-    lateinit var providerTestClass2 : Provider<TestClassA>
+    lateinit var providerTestClass1: Provider<TestClassB>
+
+    @Inject
+    lateinit var providerTestClass2: Provider<TestClassA>
 
     @CustomQualifier
     @Inject
@@ -55,16 +57,20 @@ class MainActivity : ComponentActivity() {
     lateinit var sampleAAA: Optional<AAA>
 
     @Inject
-    lateinit var sampleSet : Set<String>
+    lateinit var sampleSet: Set<String>
 
     @Inject
-    lateinit var sampleMap1 : Map<String,String>
+    lateinit var sampleMap1: Map<String, String>
 
     @Inject
-    lateinit var sampleMap2 : Map<String,Int>
+    lateinit var sampleMap2: Map<String, Int>
 
     @Inject
-    lateinit var sampleMap3 : Map<EnumClass,String>
+    lateinit var sampleMap3: Map<EnumClass, String>
+
+    @Inject
+    lateinit var myDialog: MyDialog
+
     @Inject
     fun injectTestClassB2(testClassB: TestClassB) {
         testClassB2 = testClassB
@@ -97,20 +103,24 @@ class MainActivity : ComponentActivity() {
         Log.e("TAG", "onCreate: sampleRepository : ${sampleRepository}")
         Log.e("TAG", "onCreate: sampleRepository.getUUID() : ${sampleRepository.getUUID()}")
 
-        Log.e("TAG", "onCreate: sampleAAA is present : ${sampleAAA.isPresent}", )
+        Log.e("TAG", "onCreate: sampleAAA is present : ${sampleAAA.isPresent}")
 
         assert(this::sampleSet.isInitialized)
-        Log.e("TAG", "onCreate: sampleSet size , ${sampleSet.size}", )
+        Log.e("TAG", "onCreate: sampleSet size , ${sampleSet.size}")
         sampleSet.forEachIndexed { index, s ->
-            Log.e("TAG", "onCreate: sampleSet $index is $s", )
+            Log.e("TAG", "onCreate: sampleSet $index is $s")
         }
 
-        Log.e("TAG", "onCreate: sampleMap1 key : SampleA , value : ${sampleMap1["SampleA"]}", )
-        Log.e("TAG", "onCreate: sampleMap1 key : SampleB , value : ${sampleMap1["SampleB"]}", )
+        Log.e("TAG", "onCreate: sampleMap1 key : SampleA , value : ${sampleMap1["SampleA"]}")
+        Log.e("TAG", "onCreate: sampleMap1 key : SampleB , value : ${sampleMap1["SampleB"]}")
 
-        Log.e("TAG", "onCreate: sampleMap2 key : SampleC , value : ${sampleMap2["SampleC"]}", )
+        Log.e("TAG", "onCreate: sampleMap2 key : SampleC , value : ${sampleMap2["SampleC"]}")
 
-        Log.e("TAG", "onCreate: sampleMap3 key : EnumClass.TEST_A , value : ${sampleMap3[EnumClass.TEST_A]}", )
+        Log.e(
+            "TAG",
+            "onCreate: sampleMap3 key : EnumClass.TEST_A , value : ${sampleMap3[EnumClass.TEST_A]}",
+        )
+
 
         setContent {
             SampleComposeTheme {
@@ -120,6 +130,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting(myName.toString())
+                    Button(onClick = { myDialog.show() }) {
+                        Text(text = "CustomComponent Test")
+                    }
                 }
             }
         }
