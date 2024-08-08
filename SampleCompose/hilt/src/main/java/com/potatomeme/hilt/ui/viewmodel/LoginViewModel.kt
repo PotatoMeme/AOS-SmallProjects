@@ -5,13 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.potatomeme.hilt.data.repository.UserDataRepository
 import com.potatomeme.hilt.ui.state.LoginUiState
 import com.potatomeme.hilt.ui.state.UserState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel constructor(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val repository: UserDataRepository,//생성자에 주입하는 방식으로 LoginViewModel에 UserDataRepository의 책임을 없앰
 ): ViewModel(){
     private val _uiState = MutableStateFlow(

@@ -1,7 +1,9 @@
 package com.potatomeme.hilt
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class App : Application() {
-    val appContainer: AppContainer = AppContainer(context = this)
-}
+@HiltAndroidApp
+class App : Application()
+
+

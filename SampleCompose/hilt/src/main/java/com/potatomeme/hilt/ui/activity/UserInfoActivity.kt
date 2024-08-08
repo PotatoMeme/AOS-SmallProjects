@@ -21,13 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
-import com.potatomeme.hilt.App
+import com.potatomeme.hilt.data.source.UserLocalDataSource
 import com.potatomeme.hilt.ui.theme.SampleComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UserInfoActivity : ComponentActivity() {
 
-    private val userLocalDataSource by lazy{ (application as App).appContainer.createUserLocalDataSource()}
+    @Inject
+    lateinit var userLocalDataSource : UserLocalDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
