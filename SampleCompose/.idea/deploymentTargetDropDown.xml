@@ -2,32 +2,13 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ImagePreview">
-        <State />
-      </entry>
       <entry key="app">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\main\.android\avd\Nexus_5_API_33.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-06-30T12:57:18.124501Z" />
-        </State>
+        <State />
       </entry>
       <entry key="hilt">
         <State />
       </entry>
-      <entry key="hilt_module">
-        <State />
-      </entry>
-      <entry key="hilt_sample">
+      <entry key="hilt_architecture">
         <State>
           <targetSelectedWithDropDown>
             <Target>
@@ -40,27 +21,14 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-08-03T09:34:30.018137400Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-08-16T00:38:52.040632600Z" />
         </State>
       </entry>
-      <entry key="hilt_sample.hilt_module">
+      <entry key="hilt_sample">
         <State />
       </entry>
       <entry key="navigation">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\main\.android\avd\Nexus_5_API_31.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-07-23T14:39:08.231156500Z" />
-        </State>
+        <State />
       </entry>
       <entry key="self_injector">
         <State />
