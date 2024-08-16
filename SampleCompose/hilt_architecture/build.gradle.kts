@@ -59,6 +59,10 @@ kapt {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":presentation"))
+
     val hiltVersion = 2.49
 
     implementation(libs.androidx.core.ktx)
