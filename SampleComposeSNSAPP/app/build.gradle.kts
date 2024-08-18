@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    alias(libs.plugins.kotlin.serialization)
+    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -47,9 +51,14 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
+    //projects
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":presentation"))
@@ -69,4 +78,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.datastore)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.serialization)
+
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }
