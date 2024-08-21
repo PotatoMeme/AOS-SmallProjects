@@ -21,7 +21,9 @@ import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.theme.PresentationTheme
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onLoginClick: () -> Unit,
+) {
     Surface {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -46,7 +48,7 @@ fun WelcomeScreen() {
                     .padding(24.dp)
                     .fillMaxWidth()
                     .height(48.dp),
-                onClick = { /*TODO*/ },
+                onClick = onLoginClick,
                 text = "Login"
             )
         }
@@ -57,6 +59,6 @@ fun WelcomeScreen() {
 @Composable
 fun WelcomeScreenPreview() {
     PresentationTheme {
-        WelcomeScreen()
+        WelcomeScreen {}
     }
 }

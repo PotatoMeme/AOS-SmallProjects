@@ -18,13 +18,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
 
-
 @Composable
 fun LoginScreen(
+    //viewModel()은 navigation 사용시 네비게이션 컴포넌트가 백스택에서 사라졌을경우가 있음 이때 ViewModel도 소멸되어야맞지만 소멸되지 않음
+    //그래서 백스텍에 맞춰서 viewmodel의 생명주기를 관리해야되지만 hiltViewModel을 사용할경우 이문제는 해결됨
+    //viewModel: LoginViewModel = viewModel(),
+    viewModel: LoginViewModel = hiltViewModel(),
+) {
+    LoginScreen(
+        "",
+        "",
+        {},
+        {},
+        viewModel::onLoginClick,
+        {}
+    )
+}
+
+
+@Composable
+private fun LoginScreen(
     id: String,
     password: String,
     onIdChange: (String) -> Unit,
