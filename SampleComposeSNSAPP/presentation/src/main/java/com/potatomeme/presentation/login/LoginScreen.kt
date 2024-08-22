@@ -35,6 +35,7 @@ fun LoginScreen(
     //그래서 백스텍에 맞춰서 viewmodel의 생명주기를 관리해야되지만 hiltViewModel을 사용할경우 이문제는 해결됨
     //viewModel: LoginViewModel = viewModel(),
     viewModel: LoginViewModel = hiltViewModel(),
+    onSignUpClick : () -> Unit
 ) {
     val state = viewModel.collectAsState().value
     val context = LocalContext.current
@@ -55,7 +56,7 @@ fun LoginScreen(
         viewModel::onIdChange,
         viewModel::onPasswordChange,
         viewModel::onLoginClick,
-        {}
+        onSignUpClick = onSignUpClick
     )
 }
 

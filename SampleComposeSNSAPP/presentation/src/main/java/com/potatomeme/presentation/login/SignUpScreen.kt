@@ -1,8 +1,8 @@
 package com.potatomeme.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,14 +15,52 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
+import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 
 @Composable
 fun SignUpScreen(
+    viewModel: SignUpViewModel = hiltViewModel(),
+    onNavigateToLoginScreen : () -> Unit
+) {
+    val state = viewModel.collectAsState().value
+    val context = LocalContext.current
+    viewModel.collectSideEffect { sideEffect ->
+        when (sideEffect) {
+            is SignUpSideEffect.Toast -> Toast.makeText(
+                context,
+                sideEffect.message,
+                Toast.LENGTH_SHORT
+            ).show()
+
+            SignUpSideEffect.NavigateToLoginScreen -> onNavigateToLoginScreen()
+        }
+    }
+
+    SignUpScreen(
+        id = state.id,
+        username = state.username,
+        password = state.password,
+        checkPassword = state.checkPassword,
+        onIdChange = viewModel::onIdChange,
+        onUsernameChange = viewModel::onUsernameChange,
+        onPasswordChange = viewModel::onPasswordChange,
+        onCheckPasswordChange = viewModel::onCheckPasswordChange,
+        onSignUpClick = viewModel::onSignUpClick
+    )
+}
+
+@Composable
+private fun SignUpScreen(
     id: String,
     username: String,
     password: String,
@@ -98,6 +136,7 @@ fun SignUpScreen(
                         .padding(top = 8.dp)
                         .fillMaxWidth(),
                     value = password,
+                    visualTransformation = PasswordVisualTransformation(),
                     onValueChange = onPasswordChange
                 )
                 Text(
@@ -110,6 +149,7 @@ fun SignUpScreen(
                         .padding(top = 8.dp)
                         .fillMaxWidth(),
                     value = checkPassword,
+                    visualTransformation = PasswordVisualTransformation(),
                     onValueChange = onCheckPasswordChange
                 )
                 SampleButton(
