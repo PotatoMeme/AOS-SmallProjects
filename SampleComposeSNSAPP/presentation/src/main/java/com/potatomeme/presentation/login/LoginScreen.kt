@@ -1,5 +1,6 @@
 package com.potatomeme.presentation.login
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.potatomeme.presentation.MainActivity
 import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
@@ -35,7 +37,7 @@ fun LoginScreen(
     //그래서 백스텍에 맞춰서 viewmodel의 생명주기를 관리해야되지만 hiltViewModel을 사용할경우 이문제는 해결됨
     //viewModel: LoginViewModel = viewModel(),
     viewModel: LoginViewModel = hiltViewModel(),
-    onSignUpClick : () -> Unit
+    onSignUpClick: () -> Unit,
 ) {
     val state = viewModel.collectAsState().value
     val context = LocalContext.current
@@ -47,6 +49,16 @@ fun LoginScreen(
                 sideEffect.message,
                 Toast.LENGTH_SHORT
             ).show()
+
+            LoginSideEffect.NavigateToMainActivity -> {
+                context.startActivity(
+                    Intent(
+                        context, MainActivity::class.java
+                    ).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                )
+            }
         }
     }
 

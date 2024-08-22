@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.SampleComposeSNSAPP" >
@@ -13,6 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
