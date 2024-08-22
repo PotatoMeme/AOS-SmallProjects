@@ -85,4 +85,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    //orbit
+    implementation(libs.orbit.core)
+    // or, if on Android:
+    implementation(libs.orbit.viewmodel)
+    // If using Jetpack Compose include
+    implementation(libs.orbit.compose)
+
 }

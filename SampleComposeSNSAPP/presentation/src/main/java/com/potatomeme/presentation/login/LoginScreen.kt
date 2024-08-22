@@ -16,12 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
+import org.orbitmvi.orbit.compose.collectAsState
 
 @Composable
 fun LoginScreen(
@@ -30,11 +33,13 @@ fun LoginScreen(
     //viewModel: LoginViewModel = viewModel(),
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val state = viewModel.collectAsState().value
+
     LoginScreen(
-        "",
-        "",
-        {},
-        {},
+        state.id,
+        state.password,
+        viewModel::onIdChange,
+        viewModel::onPasswordChange,
         viewModel::onLoginClick,
         {}
     )
@@ -103,6 +108,7 @@ private fun LoginScreen(
                         .padding(top = 8.dp)
                         .fillMaxWidth(),
                     value = password,
+                    visualTransformation = PasswordVisualTransformation(),
                     onValueChange = onPasswordChange
                 )
                 SampleButton(
