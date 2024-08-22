@@ -1,9 +1,11 @@
 package com.potatomeme.presentation.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.potatomeme.domain.usecase.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
@@ -17,15 +19,21 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel(), ContainerHost<LoginState, LoginSideEffect> {
 
     override val container: Container<LoginState, LoginSideEffect> = container(
-        initialState = LoginState()
+        initialState = LoginState(),
+        buildSettings = {
+            this.exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+                intent {
+                    postSideEffect(LoginSideEffect.Toast(throwable.message.orEmpty()))
+                }
+            }
+        }
     )
 
-    fun onLoginClick() = intent{
+    fun onLoginClick() = intent {
         val id = state.id
         val password = state.password
-        viewModelScope.launch {
-            loginUseCase(id, password)
-        }
+        val token = loginUseCase(id, password).getOrThrow()
+        postSideEffect(LoginSideEffect.Toast(message = "token = $token"))
     }
 
     fun onIdChange(id: String) = intent {
@@ -48,4 +56,6 @@ data class LoginState(
     val password: String = "",
 )
 
-sealed interface LoginSideEffect
+sealed interface LoginSideEffect {
+    class Toast(val message: String) : LoginSideEffect
+}

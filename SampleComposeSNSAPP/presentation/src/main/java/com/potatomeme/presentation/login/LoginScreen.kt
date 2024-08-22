@@ -1,5 +1,6 @@
 package com.potatomeme.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +27,7 @@ import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
 import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 
 @Composable
 fun LoginScreen(
@@ -34,6 +37,17 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val state = viewModel.collectAsState().value
+    val context = LocalContext.current
+
+    viewModel.collectSideEffect { sideEffect: LoginSideEffect ->
+        when (sideEffect) {
+            is LoginSideEffect.Toast -> Toast.makeText(
+                context,
+                sideEffect.message,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     LoginScreen(
         state.id,

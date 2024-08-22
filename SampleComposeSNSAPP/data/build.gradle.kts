@@ -51,6 +51,15 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    //retrofit
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.serialization)
 }
