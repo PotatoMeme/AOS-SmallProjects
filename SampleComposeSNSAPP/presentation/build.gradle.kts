@@ -92,4 +92,8 @@ dependencies {
     // If using Jetpack Compose include
     implementation(libs.orbit.compose)
 
+    //coil
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
+
 }

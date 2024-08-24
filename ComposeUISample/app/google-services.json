@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483664142890",
+    "project_id": "cus-001",
+    "storage_bucket": "cus-001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483664142890:android:076d53027bce9aa6835953",
+        "android_client_info": {
+          "package_name": "com.potatomeme.compose_ui_sample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoSZyvsb_-Vgvu5eaR9jbpMoGdQezz4B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

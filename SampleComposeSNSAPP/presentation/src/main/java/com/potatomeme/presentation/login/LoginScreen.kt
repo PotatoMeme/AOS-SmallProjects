@@ -20,11 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.potatomeme.presentation.MainActivity
+import com.potatomeme.presentation.main.MainActivity
 import com.potatomeme.presentation.component.SampleButton
 import com.potatomeme.presentation.component.SampleTextField
 import com.potatomeme.presentation.theme.PresentationTheme
