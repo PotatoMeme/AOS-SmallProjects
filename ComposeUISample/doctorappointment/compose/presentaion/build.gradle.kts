@@ -1,25 +1,17 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.google.gms.google-services")
-
-    alias(libs.plugins.kotlin.serialization)
-    id("kotlin-kapt")
-    alias(libs.plugins.hilt)
 }
 
 android {
-    namespace = "com.potatomeme.compose_ui_sample"
+    namespace = "com.potatomeme.doctorappointment.compose.presentaion"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.potatomeme.compose_ui_sample"
         minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -52,17 +44,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
-    kapt {
-        correctErrorTypes = true
-    }
 }
 
 dependencies {
-    implementation(project(":ui:sample"))
-    implementation(project(":doctorappointment:xml:presentation"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -78,7 +66,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //hilt
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    //firebase
+    implementation(libs.firebase.database)
 }

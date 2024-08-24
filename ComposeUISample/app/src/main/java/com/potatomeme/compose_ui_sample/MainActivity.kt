@@ -23,9 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.potatomeme.compose_ui_sample.ui.theme.ComposeUISampleTheme
+import com.potatomeme.doctorappointment.xml.presentation.intro.IntroActivity
 
 class MainActivity : ComponentActivity() {
-    companion object{
+    companion object {
         private const val TAG = "MainActivity"
     }
 
@@ -37,6 +38,13 @@ class MainActivity : ComponentActivity() {
         ) {
             Log.d(TAG, "UIDescription action : SampleTitle")
             startActivityWithCls(com.potatomeme.sample.MainActivity::class.java)
+        },
+        UIDescription(
+            "DoctorAppointment XML",
+            "DoctorAppointment clone coding with xml"
+        ) {
+            Log.d(TAG, "UIDescription action : DoctorAppointment XML")
+            startActivityWithCls(IntroActivity::class.java)
         }
     )
 

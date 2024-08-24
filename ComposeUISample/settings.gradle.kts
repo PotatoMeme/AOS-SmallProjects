@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Compose-UI-Sample"
 include(":app")
 include(":ui:sample")
+include(":doctorappointment:compose:presentaion")
+include(":doctorappointment:xml:presentation")
